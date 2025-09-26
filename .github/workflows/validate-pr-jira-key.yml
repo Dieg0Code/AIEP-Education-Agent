@@ -1,0 +1,55 @@
+name: Validate PR contains Jira work item key
+
+on:
+    pull_request:
+        types: [opened, edited, synchronize]
+
+jobs:
+    validate-jira-key:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check PR title and branch follow Jira conventions (and comment on failure)
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                      const title = context.payload.pull_request && context.payload.pull_request.title || '';
+                      const branch = context.payload.pull_request && context.payload.pull_request.head && context.payload.pull_request.head.ref || '';
+                      // Key pattern (e.g. SCRUM-10)
+                      const keyPattern = /[A-Z]+-\d+/;
+                      // Title must start with the key: "SCRUM-10: ..." or "SCRUM-10 ..."
+                      const titlePattern = /^\s*[A-Z]+-\d+\b/;
+                      // Branch must follow conventions: feature/SCRUM-123-descripcion-corta or hotfix/SCRUM-123-desc
+                      const branchPattern = /^(feature|hotfix)\/[A-Z]+-\d+(?:-[a-z0-9]+)*$/;
+
+                      const examples = {
+                        branch: 'feature/SCRUM-10-login',
+                        title: 'SCRUM-10: Pantalla de login'
+                      };
+
+                      const errors = [];
+
+                      if (!titlePattern.test(title)) {
+                        errors.push(`El título del PR debe empezar con la clave Jira. Ejemplo: "${examples.title}".`);
+                      }
+                      if (!keyPattern.test(branch)) {
+                        errors.push(`El nombre de la rama debe incluir la clave Jira. Ejemplo: "${examples.branch}".`);
+                      }
+                      if (!branchPattern.test(branch)) {
+                        errors.push(`El nombre de la rama debe seguir la convención: feature/SCRUM-123-descripcion-corta o hotfix/SCRUM-123-descripcion (descripción en minúsculas y guiones). Ejemplo: "${examples.branch}".`);
+                      }
+
+                      if (errors.length > 0) {
+                        const body = `:warning: **Validación automática de Jira fallida**\n\nSe han detectado los siguientes problemas con este Pull Request:\n\n- ${errors.join('\n- ')}\n\nPor favor corrige el/los elementos anteriores y vuelve a actualizar el PR.\n\nConvenciones recomendadas:\n- Rama: \`feature/SCRUM-123-descripcion-corta\` (ej.: \`${examples.branch}\`)\n- Título PR: \`SCRUM-123: Breve descripción\` (ej.: \`${examples.title}\`)\n\nSi necesitas ayuda, etiqueta al profesor o comenta en el ticket de Jira.`;
+
+                        // Post a comment on the PR with instructions
+                        await github.rest.issues.createComment({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: context.payload.pull_request.number,
+                          body
+                        });
+
+                        core.setFailed('Jira branch/title validation failed: ' + errors.join('; '));
+                      } else {
+                        core.info('Branch and PR title follow Jira conventions — OK.');
+                      }
