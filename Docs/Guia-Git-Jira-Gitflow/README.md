@@ -1,213 +1,216 @@
-¡Por supuesto, profe Diego! Aquí tienes una guía clara, entretenida y didáctica para tus estudiantes del AIEP sobre **cómo usar Git con Jira y GitFlow**, además de cómo resolver los problemas más comunes. Puedes compartirla como PDF, Notion, Google Doc o imprimirla para el taller.
+# 🚀 Guía práctica: Git + Jira + GitFlow
 
----
+**Profesor:** Diego Obando  
+**Para:** Estudiantes del proyecto AIEP
 
-# 🚀 Guía Rápida: Git + Jira + GitFlow
+Esta guía establece las convenciones y mejores prácticas para el manejo de código usando Git, integración con Jira y el flujo GitFlow.
 
-**Metodologías de Desarrollo de Software**  
-Profe: Diego Obando
+## 📋 Resumen ejecutivo
 
----
+- **Ramas principales:** `main` (producción), `develop` (integración)
+- **Ramas de trabajo:** `feature/SCRUM-<n>-descripcion`, `hotfix/SCRUM-<n>-descripcion`, `release/x.y.z`
+- **Convención:** Todos los commits y PRs deben incluir la clave de Jira
+- **Flujo:** Siempre trabajar desde `develop`, crear PR hacia `develop`
 
-## 1. ¿Para qué sirve todo esto? 🤔
+## 🔄 Flujo de trabajo completo
 
-- **Git**: Guarda el historial de tu código y permite trabajar en equipo sin pisarse los talones.
-- **Jira**: Organiza las tareas del proyecto (como un Trello pro).
-- **GitFlow**: Es una forma ordenada de usar ramas en Git para que el caos no reine.
-
----
-
-## 2. El flujo de trabajo ideal 🏄‍♂️
-
-### 1️⃣ Antes de empezar una tarea
-
-1. **Busca tu tarea en Jira**  
-   Ejemplo: `SCRUM-10 Crear pantalla de login`
-
-2. **Crea tu rama feature desde develop**
-   ```bash
-   git checkout develop
-   git pull
-   git checkout -b feature/SCRUM-10-login
-   ```
-
----
-
-### 2️⃣ Mientras trabajas
-
-- Haz commits pequeños y frecuentes:
-  ```bash
-  git add .
-  ```
-
-# 🚀 Guía práctica: Git + Jira + GitFlow (mejorada)
-
-Profe: Diego Obando — Versión mejorada: claridad, ejemplos y checklist para PR.
-
-Esta guía está pensada para estudiantes y equipos que participan en el proyecto AIEP. Explica convenciones, comandos útiles, cómo resolver conflictos y buenas prácticas para mantener un repositorio sano.
-
-## Resumen rápido
-
-- Ramas principales: `main` (producción), `develop` (integración)
-- Ramas temporales: `feature/*`, `release/*`, `hotfix/*`
-- Convención de ramas: `feature/SCRUM-<n>-breve-descripción`
-- Convención de commits y PR: incluir la clave de Jira (`SCRUM-10`)
-
-## 1. Flujo recomendado (paso a paso)
-
-1. Antes de empezar
-
-- Revisa la tarea en Jira (ej: `SCRUM-10: Crear pantalla de login`).
-- Actualiza `develop` y crea tu rama desde `develop`:
+### 1. Preparación
 
 ```bash
+# Actualizar develop y crear nueva rama
 git checkout develop
 git pull origin develop
-git checkout -b feature/SCRUM-10-login
+git checkout -b feature/SCRUM-123-descripcion-corta
 ```
 
-2. Durante el desarrollo
-
-- Haz commits pequeños y atómicos. Incluye la referencia a Jira en el mensaje.
-- Ejemplo de commit:
+### 2. Desarrollo
 
 ```bash
-git add src/components/Login.tsx
-git commit -m "SCRUM-10: feat(login): agrega formulario y validaciones básicas"
-git push -u origin feature/SCRUM-10-login
+# Commits frecuentes y descriptivos
+git add .
+git commit -m "SCRUM-123: feat(modulo): implementa funcionalidad X"
+git push -u origin feature/SCRUM-123-descripcion-corta
 ```
 
-3. Antes de crear el Pull Request (PR)
-
-- Asegúrate de traer cambios de `develop` y rebasear o mergearlos localmente:
+### 3. Antes del Pull Request
 
 ```bash
+# Sincronizar con develop
 git fetch origin
-git rebase origin/develop
-# o, si prefieres no reescribir historial:
-git merge origin/develop
+git rebase origin/develop  # o git merge origin/develop
+# Resolver conflictos si existen
+git push --force-with-lease  # solo si hiciste rebase
 ```
 
-- Resuelve conflictos localmente (ver sección de conflictos). Luego push.
-- Crea el PR contra `develop`.
+### 4. Pull Request
 
-4. PR: título y descripción
+- **Crear PR** desde tu rama hacia `develop`
+- **Título:** `SCRUM-123: Descripción breve de la funcionalidad`
+- **Completar plantilla** con enlace a Jira y checklist
+- **Solicitar revisión** de 1-2 compañeros
 
-- Título sugerido: `SCRUM-10: Pantalla de login`
-- En la descripción enlaza la historia de Jira y agrega checklist (tests, revisión, screenshots si aplica).
+### 5. Merge y cierre
 
-## 2. Convenciones (muy importantes)
+- Esperar aprobaciones y checks verdes
+- Mergear el PR
+- Actualizar estado en Jira
 
-- Nombres de ramas:
+## 📝 Convenciones obligatorias
 
-  - Features: `feature/SCRUM-123-descripcion-corta`
-  - Releases: `release/x.y.z`
-  - Hotfixes: `hotfix/SCRUM-456-descripcion`
+### Nombres de ramas
 
-- Mensajes de commit: comienzan con la clave Jira y una etiqueta opcional tipo `feat|fix|chore|docs`.
+```
+feature/SCRUM-123-login-component
+hotfix/SCRUM-456-fix-authentication
+release/1.2.0
+```
 
-  - Formato recomendado: `SCRUM-10: feat(login): agrega formulario de login`
+### Mensajes de commit
 
-- PRs siempre hacia `develop` (salvo hotfixes que vayan a `main` y `develop`).
+```
+SCRUM-123: feat(auth): agrega validación de usuario
+SCRUM-123: fix(ui): corrige alineación en formulario
+SCRUM-123: docs(readme): actualiza instrucciones de setup
+```
 
-## 3. Checklist para Pull Requests (pégala en la plantilla de PR)
+**Prefijos recomendados:** `feat`, `fix`, `chore`, `docs`, `test`, `refactor`
 
-- [ ] La rama está creada desde `develop`.
-- [ ] La descripción incluye la clave Jira y un enlace al ticket.
-- [ ] Hice rebase/merge con `develop` y resolví conflictos.
-- [ ] Código compilado y pruebas locales pasan.
-- [ ] No hay cambios innecesarios en archivos (ej.: package-lock, builds) salvo justificados.
-- [ ] Etiqueté a 1-2 revisores.
+### Pull Requests
 
-## 4. Resolución de conflictos (guía práctica)
+- **Título:** Debe iniciar con clave Jira
+- **Descripción:** Incluir enlace al ticket y checklist completo
+- **Target:** Siempre hacia `develop` (excepto hotfixes)
 
-Cuando haces `rebase` o `merge` y Git te indica conflictos:
+## ✅ Checklist para Pull Requests
 
-1. Identifica archivos en conflicto: Git lista los archivos.
-2. Abre en VS Code y busca las marcas `<<<<<<<`, `=======`, `>>>>>>>`.
-3. Decide qué quedará (puedes combinar ambos cambios o elegir uno).
-4. Marca como resuelto y continúa:
+Copia este checklist en cada PR:
+
+```markdown
+## Checklist
+
+- [ ] Rama creada desde `develop` actualizado
+- [ ] Título incluye clave Jira (SCRUM-XXX)
+- [ ] Enlace al ticket de Jira en la descripción
+- [ ] Código compila sin errores
+- [ ] Pruebas locales ejecutadas y exitosas
+- [ ] Rebase/merge con `develop` realizado
+- [ ] No hay archivos innecesarios (builds, logs, etc.)
+- [ ] Revisores asignados (@usuario1, @usuario2)
+
+## Información adicional
+
+- **Ticket Jira:** [SCRUM-XXX](enlace-al-ticket)
+- **Tipo:** Feature/Bugfix/Hotfix
+- **Screenshots:** (si aplica)
+```
+
+## ⚔️ Resolución de conflictos
+
+### Identificar conflictos
 
 ```bash
-git add <archivo-resuelto>
-git rebase --continue   # si estabas rebaseando
+git status  # Ver archivos en conflicto
+```
+
+### Resolver manualmente
+
+1. Abrir archivo en VS Code
+2. Buscar marcadores: `<<<<<<<`, `=======`, `>>>>>>>`
+3. Decidir qué código mantener
+4. Eliminar marcadores
+5. Guardar archivo
+
+### Completar resolución
+
+```bash
+git add archivo-resuelto.js
+git rebase --continue  # si estás en rebase
 # o
-git commit              # si estabas haciendo merge
+git commit  # si estás en merge
 ```
 
-Si necesitas volver al estado previo del rebase:
+### Abortar si es necesario
 
 ```bash
-git rebase --abort
+git rebase --abort  # volver al estado inicial
+git merge --abort   # cancelar merge
 ```
 
-Consejo visual: en VS Code usa la vista de comparación y los botones "Accept Current" / "Accept Incoming".
+## 🔧 Comandos de rescate
 
-## 5. Cómo deshacer cambios (operaciones seguras para estudiantes)
-
-- Deshacer cambios en archivos no añadidos:
-  - `git restore <archivo>`
-- Deshacer cambios staged (antes de commit):
-  - `git restore --staged <archivo>`
-- Deshacer el último commit pero mantener los cambios en working tree:
-  - `git reset --soft HEAD~1`
-- Revertir un commit ya compartido (crea un nuevo commit que deshace):
-  - `git revert <commit>`
-
-Evita `git reset --hard` sin supervisión: elimina trabajo local.
-
-## 6. Rebase vs Merge (breve)
-
-- Rebase: reescribe historial para aplicar tus commits sobre la punta de `develop`. Mantiene historial lineal.
-- Merge: conserva el historial tal cual y crea un commit de merge. No reescribe historial.
-
-Regla sencilla: usa rebase para mantener tu rama actualizada antes del PR (si no has compartido tu rama o el equipo lo acepta). Si no quieres reescribir historial, usa merge.
-
-## 7. Hotfixes y releases (comandos útiles)
-
-- Hotfix (corrección urgente):
+### Deshacer cambios locales
 
 ```bash
+git restore archivo.js              # descartar cambios no staged
+git restore --staged archivo.js     # quitar archivo del stage
+git reset --soft HEAD~1            # deshacer último commit (mantener cambios)
+```
+
+### Revertir commits compartidos
+
+```bash
+git revert abc123  # crear commit que deshace el commit abc123
+```
+
+⚠️ **Evitar:** `git reset --hard` sin supervisión
+
+## 🚨 Hotfixes (urgencias en producción)
+
+```bash
+# Crear hotfix desde main
 git checkout main
 git pull origin main
-git checkout -b hotfix/SCRUM-456-fix-login
-# arreglas, commiteas, haces PR a main (y luego merge a develop)
+git checkout -b hotfix/SCRUM-456-fix-critico
+
+# Después del fix
+# 1. PR hacia main
+# 2. Merge main hacia develop
+git checkout develop
+git pull origin main
 ```
 
-## 8. Errores comunes y cómo evitarlos
+## 🔄 Rebase vs Merge
 
-- "Trabajo en la rama equivocada": antes de empezar, comprueba `git status` y la rama con `git branch`.
-- "Push sin pull/rebase": siempre trae cambios remotos antes de empezar una tarea.
-- "Commits enormes": divide el trabajo en commits lógicos y pequeños.
+| Aspecto         | Rebase                        | Merge                               |
+| --------------- | ----------------------------- | ----------------------------------- |
+| **Historial**   | Lineal y limpio               | Conserva contexto original          |
+| **Cuándo usar** | Antes de PR, ramas personales | Integraciones, trabajo colaborativo |
+| **Comando**     | `git rebase origin/develop`   | `git merge origin/develop`          |
 
-## 9. Plantillas útiles (copiar/pegar)
+**Recomendación:** Usa rebase para mantener tu rama actualizada antes del PR.
 
-- Nombre de rama: `feature/SCRUM-10-login`
-- Commit: `SCRUM-10: feat(login): agrega inputs y validación básica`
-- PR título: `SCRUM-10: Pantalla de login`
-- PR descripción mínima:
+## ❌ Errores comunes y prevención
+
+| Error                       | Prevención                                 |
+| --------------------------- | ------------------------------------------ |
+| Trabajar en rama incorrecta | Siempre verificar con `git branch`         |
+| Push sin actualizar         | `git pull origin develop` antes de empezar |
+| Commits gigantes            | Commits pequeños y atómicos                |
+| Olvidar clave Jira          | Revisar mensaje antes de commit            |
+| Conflictos complejos        | Mantener rama sincronizada frecuentemente  |
+
+## 🎯 Plantillas rápidas
+
+### Crear rama
+
+```bash
+git checkout -b feature/SCRUM-[NÚMERO]-[descripcion-corta]
+```
+
+### Commit típico
+
+```bash
+git commit -m "SCRUM-[NÚMERO]: [tipo]([scope]): [descripción]"
+```
+
+### Título de PR
 
 ```
-Relacionado con: SCRUM-10
-Descripción: Implementa UI de login, validaciones y rutas.
-Checklist:
-- [ ] Compila
-- [ ] Pruebas unitarias (si aplica)
-- [ ] Revisores: @usuario
+SCRUM-[NÚMERO]: [Descripción clara de la funcionalidad]
 ```
 
-## 10. Recursos
+## 📚 Recursos útiles
 
-- GitFlow (Atlassian): https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow
-- Git basics: https://git-scm.com/book/es/v2
-- Resolver conflictos (video): https://www.youtube.com/watch?v=JtIX3HJKwfo
-
----
-
-Si quieres, puedo:
-
-- Añadir una plantilla de PR en `.github/PULL_REQUEST_TEMPLATE.md`.
-- Añadir un archivo `CONTRIBUTING.md` con estas reglas.
-- Generar un PDF listo para imprimir.
-
-Dime cuál de estas mejoras quieres que implemente y lo hago.
+- **GitFlow oficial:** [Atlassian GitFlow](https://www.atlassian.com/es/git/tutorials/comparing-workflows/gitflow-workflow)
+- **Git fundamentals:** [Pro Git Book](https://git-scm.com/book/es/v2)
+- **Resolución de conflictos:** [Git Merge Conflicts](https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts)
