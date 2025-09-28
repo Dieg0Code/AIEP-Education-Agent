@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            display: ["Lexend"],
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            full: "9999px"
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex h-screen flex-col">
+<header class="flex items-center justify-between border-b border-gray-200 dark:border-white/5 bg-background-light dark:bg-background-dark p-4">
+<button class="text-gray-600 dark:text-white/70">
+<svg class="h-6 w-6" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 18l-6-6 6-6"></path>
+</svg>
+</button>
+<h1 class="text-lg font-bold text-black dark:text-white">Insight Details</h1>
+<div class="flex items-center gap-2">
+<button class="text-gray-600 dark:text-white/70">
+<span class="material-symbols-outlined">bookmark_border</span>
+</button>
+<button class="text-gray-600 dark:text-white/70">
+<span class="material-symbols-outlined">ios_share</span>
+</button>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto p-6 text-black dark:text-white">
+<div class="space-y-8">
+<div>
+<div class="flex items-center gap-4 mb-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"></path>
+</svg>
+</div>
+<div>
+<p class="text-xl font-bold">Procrastination Pattern</p>
+<p class="text-sm text-gray-500 dark:text-white/40">Detected on Oct 26, 2023</p>
+</div>
+</div>
+<div class="rounded-lg bg-white dark:bg-white/5 p-4">
+<p class="text-sm text-gray-600 dark:text-white/60">
+              The AI has identified a recurring pattern of delaying study sessions, particularly for subjects that you've expressed lower confidence in. This is often observed in the evenings, with conversations shifting towards distraction-seeking topics.
+            </p>
+</div>
+</div>
+<div>
+<h2 class="text-lg font-bold mb-3">Conversation Context</h2>
+<div class="space-y-3">
+<div class="rounded-lg bg-primary/5 p-3">
+<p class="text-xs text-gray-500 dark:text-white/40 mb-1">You, Oct 25, 9:14 PM</p>
+<p class="text-sm text-black dark:text-white">"Ugh, I should be studying for my physics midterm, but I just can't bring myself to start. It's so boring."</p>
+</div>
+<div class="rounded-lg bg-white dark:bg-white/5 p-3">
+<p class="text-xs text-primary dark:text-primary mb-1">AI, Oct 25, 9:15 PM</p>
+<p class="text-sm text-black dark:text-white">"I understand. Sometimes the hardest part is getting started. Perhaps we could break it down into smaller, more manageable chunks?"</p>
+</div>
+<div class="rounded-lg bg-primary/5 p-3">
+<p class="text-xs text-gray-500 dark:text-white/40 mb-1">You, Oct 25, 9:16 PM</p>
+<p class="text-sm text-black dark:text-white">"Maybe later. Hey, did you see that new movie trailer that just dropped? It looks amazing."</p>
+</div>
+</div>
+</div>
+<div>
+<h2 class="text-lg font-bold mb-3">Sentiment Analysis</h2>
+<div class="rounded-lg bg-white dark:bg-white/5 p-4">
+<div class="h-40">
+<img alt="Sentiment graph" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWFwk8saOsBMhrDrv5lb57GG13lPT0loZN4BJe9Zjf1-3GZB6ZIHRvgl7-BhfVCrU3xGj5uwXzDD-EcDCYVN3erll2kpUb5Kio0u070n89y3RfPp8MwFf6h3paFZn5gHKhN47gjzEEz18pp2foi_HMEojxY3a4Dr0uET_FfCH_E0rlF6T3L_YsSjk-BB20fZZqPhteR_-xb1_meG86xbWfTFkxWKWu0Mf7i92sAh4OahnyDd1OnbdNxtU9TY4ckEKZH2jdwftxowe2"/>
+</div>
+<p class="text-center text-xs text-gray-500 dark:text-white/40 mt-2">Sentiment shift during conversations about Physics</p>
+</div>
+</div>
+<div>
+<h2 class="text-lg font-bold mb-3">Actionable Recommendations</h2>
+<div class="space-y-3">
+<div class="flex items-start gap-3 rounded-lg bg-white dark:bg-white/5 p-4">
+<span class="material-symbols-outlined text-primary mt-1">lightbulb</span>
+<p class="text-sm text-gray-600 dark:text-white/60 flex-1"><span class="font-semibold text-black dark:text-white">The Pomodoro Technique:</span> Try studying in focused 25-minute intervals with 5-minute breaks. This can make starting feel less daunting.</p>
+</div>
+<div class="flex items-start gap-3 rounded-lg bg-white dark:bg-white/5 p-4">
+<span class="material-symbols-outlined text-primary mt-1">group</span>
+<p class="text-sm text-gray-600 dark:text-white/60 flex-1"><span class="font-semibold text-black dark:text-white">Connect with a Study Buddy:</span> The AI can help you find another student who is also studying physics. Working together can increase motivation.</p>
+</div>
+<div class="flex items-start gap-3 rounded-lg bg-white dark:bg-white/5 p-4">
+<span class="material-symbols-outlined text-primary mt-1">explore</span>
+<p class="text-sm text-gray-600 dark:text-white/60 flex-1"><span class="font-semibold text-black dark:text-white">Explore a Different Angle:</span> Let's find some exciting real-world applications of the physics concepts you're studying to make the material more engaging.</p>
+</div>
+</div>
+</div>
+<div>
+<h2 class="text-lg font-bold mb-3">Feedback on this Insight</h2>
+<div class="flex justify-center gap-4 rounded-lg bg-white dark:bg-white/5 p-4">
+<button class="flex flex-col items-center gap-1 text-gray-600 dark:text-white/60">
+<span class="material-symbols-outlined text-2xl">thumb_up</span>
+<span class="text-xs">Helpful</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-gray-600 dark:text-white/60">
+<span class="material-symbols-outlined text-2xl">thumb_down</span>
+<span class="text-xs">Not Helpful</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

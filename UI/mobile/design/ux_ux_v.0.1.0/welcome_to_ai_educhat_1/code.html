@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-screen w-full flex-col justify-between overflow-hidden">
+<div class="flex-grow flex flex-col">
+<div class="relative h-80 w-full">
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAh9islTOjCT2xFLjLQyXMrCTiAQuAxTWpLJ1_EPFOX11OY5Fd-6nQ5nLXHHTPpzJMKKr_7BxT6SB498j46Z1RsjCGtCuvvjTcB9DSJVhf3NiwEu_JLFGRCgvkgfAMWn1G2EL1bG9Jpl84pcs306cN-vYQYKnq7WJ5whhq3GVwEtqCKM5ZXejtrzWjRoU427RoUyAsjUxJMlIbWVBvb1i7ao7Ti7zfo7g4ElCkAiGwQ2L4dzKgV-V4wfZ3JCFvNyu_DGfjS-m9qYh17");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-background-light/70 dark:via-background-dark/70 to-transparent"></div>
+</div>
+<div class="flex flex-col items-center justify-center p-6 text-center -mt-16">
+<div class="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary text-white">
+<span class="material-symbols-outlined text-5xl">school</span>
+</div>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white">Welcome to StudyBuddy!</h1>
+<p class="mt-2 max-w-md text-gray-600 dark:text-gray-300">
+                    Your personal AI tutor is here to help you learn and grow. Explore AI chat, build your student profile, and categorize your saved responses.
+                </p>
+</div>
+</div>
+<div class="px-6 pb-8">
+<div class="flex flex-col gap-4">
+<button class="w-full rounded-lg bg-primary py-3 text-base font-bold text-white transition-opacity hover:opacity-90">
+                    Start Tutorial
+                </button>
+<button class="w-full rounded-lg bg-primary/10 dark:bg-primary/20 py-3 text-base font-bold text-primary transition-colors hover:bg-primary/20 dark:hover:bg-primary/30">
+                    Continue to App
+                </button>
+</div>
+<div class="mt-8 flex w-full flex-row items-center justify-center gap-2">
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+<div class="h-2 w-2 rounded-full bg-primary/20 dark:bg-primary/30"></div>
+<div class="h-2 w-2 rounded-full bg-primary/20 dark:bg-primary/30"></div>
+</div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Lexend"],
+            },
+            borderRadius: { DEFAULT: "0.5rem", lg: "1rem", xl: "1.5rem", full: "9999px" },
+          },
+        },
+      };
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display">
+<div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<header class="flex sticky top-0 items-center bg-background-light dark:bg-background-dark p-4 z-10 border-b border-primary/20 dark:border-primary/30">
+<button class="flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl"> arrow_back_ios_new </span>
+</button>
+<h1 class="flex-1 text-center text-xl font-bold text-gray-900 dark:text-white pr-8">My Insight Notes</h1>
+</header>
+<main class="flex-1 px-4 pt-4 pb-20 space-y-4">
+<div class="relative">
+<input class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Search notes..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 text-primary text-sm font-medium">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+        Filter
+      </button>
+<div class="flex items-center gap-2 overflow-x-auto pb-2 -mb-2">
+<button class="px-3 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm whitespace-nowrap">By Insight</button>
+<button class="px-3 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm whitespace-nowrap">Date Created</button>
+<button class="px-3 py-1 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm whitespace-nowrap">Tags</button>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-start gap-4 p-4 rounded-lg bg-white dark:bg-primary/10">
+<div class="flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 shrink-0 size-12 text-primary">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-gray-900 dark:text-white font-semibold">Journal Entry: Reflecting on Stressful Situations</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Insight: Understanding Your Emotional Triggers</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 text-xs rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300">#stress</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-green-100 dark:bg-green-900/50 text-green-600 dark:text-green-300">#reflection</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-lg bg-white dark:bg-primary/10">
+<div class="flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 shrink-0 size-12 text-primary">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-gray-900 dark:text-white font-semibold">Note: Active Listening Techniques</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Insight: Improving Communication Skills</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 text-xs rounded-full bg-yellow-100 dark:bg-yellow-900/50 text-yellow-600 dark:text-yellow-300">#communication</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-lg bg-white dark:bg-primary/10">
+<div class="flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 shrink-0 size-12 text-primary">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-gray-900 dark:text-white font-semibold">Affirmations for Self-Esteem</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Insight: Building Self-Confidence</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 text-xs rounded-full bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300">#self-esteem</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-300">#affirmations</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-lg bg-white dark:bg-primary/10">
+<div class="flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 shrink-0 size-12 text-primary">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-gray-900 dark:text-white font-semibold">Breathing Exercises for Calmness</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Insight: Managing Anxiety</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 text-xs rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300">#anxiety</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-300">#mindfulness</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-lg bg-white dark:bg-primary/10">
+<div class="flex items-center justify-center rounded-full bg-primary/10 dark:bg-primary/20 shrink-0 size-12 text-primary">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<div class="flex flex-col flex-1">
+<p class="text-gray-900 dark:text-white font-semibold">Tips for Empathy and Connection</p>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Insight: Enhancing Relationships</p>
+<div class="flex items-center gap-2 mt-2">
+<span class="px-2 py-0.5 text-xs rounded-full bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300">#relationships</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-orange-100 dark:bg-orange-900/50 text-orange-600 dark:text-orange-300">#empathy</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 border-t border-primary/20 dark:border-primary/30 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2 flex justify-around">
+<a class="flex flex-col items-center justify-end gap-1 text-gray-500 dark:text-gray-400" href="#">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+<p class="text-xs font-medium">Chat</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-gray-500 dark:text-gray-400" href="#">
+<span class="material-symbols-outlined text-2xl">person</span>
+<p class="text-xs font-medium">Profile</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-2xl fill-current">bookmark</span>
+<p class="text-xs font-medium">Saved</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-gray-500 dark:text-gray-400" href="#">
+<span class="material-symbols-outlined text-2xl">bar_chart</span>
+<p class="text-xs font-medium">Insights</p>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-gray-500 dark:text-gray-400" href="#">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<p class="text-xs font-medium">Settings</p>
+</a>
+</nav>
+</div>
+
+</body></html>

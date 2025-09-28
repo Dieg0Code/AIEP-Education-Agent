@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Password Reset Confirmation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+<div class="flex flex-col h-screen justify-between">
+<header class="flex justify-end p-4">
+<button class="w-12 h-12 flex items-center justify-center text-gray-600 dark:text-gray-400">
+<span class="material-symbols-outlined text-3xl">
+                    help
+                </span>
+</button>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-6 text-center">
+<div class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-primary text-5xl">
+                    mail
+                </span>
+</div>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Check your email</h1>
+<p class="max-w-md text-base text-gray-600 dark:text-gray-400">
+                We've sent a password reset link to your email address. Please check your inbox and follow the instructions to reset your password.
+            </p>
+</main>
+<footer class="p-6">
+<div class="space-y-4">
+<button class="w-full h-12 px-6 bg-primary text-white font-bold rounded-lg text-base">
+                    Resend Email
+                </button>
+<button class="w-full h-12 px-6 bg-primary/10 dark:bg-primary/20 text-primary font-bold rounded-lg text-base">
+                    Back to Login
+                </button>
+</div>
+</footer>
+</div>
+
+</body></html>

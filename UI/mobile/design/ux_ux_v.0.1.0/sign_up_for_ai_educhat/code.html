@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "foreground-light": "#0d141b",
+                        "foreground-dark": "#f6f7f8",
+                        "input-light": "#e7edf3",
+                        "input-dark": "#1c2a38",
+                        "placeholder-light": "#4c739a",
+                        "placeholder-dark": "#a0b3c6",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .form-checkbox:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="container mx-auto px-4 py-8">
+<div class="flex flex-col items-center justify-center min-h-screen">
+<div class="w-full max-w-md">
+<div class="text-center mb-8">
+<h1 class="text-3xl font-bold text-foreground-light dark:text-foreground-dark">Create your Account</h1>
+<p class="text-foreground-light/70 dark:text-foreground-dark/70 mt-2">Let's get started with your learning journey!</p>
+</div>
+<form class="space-y-4">
+<div>
+<label class="sr-only" for="name">Full Name</label>
+<input class="w-full h-14 px-4 bg-input-light dark:bg-input-dark text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark border-none rounded-lg focus:ring-2 focus:ring-primary" id="name" name="name" placeholder="Full Name" type="text"/>
+</div>
+<div>
+<label class="sr-only" for="email">Email</label>
+<input class="w-full h-14 px-4 bg-input-light dark:bg-input-dark text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark border-none rounded-lg focus:ring-2 focus:ring-primary" id="email" name="email" placeholder="Email" type="email"/>
+</div>
+<div>
+<label class="sr-only" for="password">Password</label>
+<input class="w-full h-14 px-4 bg-input-light dark:bg-input-dark text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark border-none rounded-lg focus:ring-2 focus:ring-primary" id="password" name="password" placeholder="Password" type="password"/>
+</div>
+<div>
+<label class="sr-only" for="confirm-password">Confirm Password</label>
+<input class="w-full h-14 px-4 bg-input-light dark:bg-input-dark text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark border-none rounded-lg focus:ring-2 focus:ring-primary" id="confirm-password" name="confirm-password" placeholder="Confirm Password" type="password"/>
+</div>
+<div class="flex items-start pt-2">
+<input class="form-checkbox h-5 w-5 text-primary bg-input-light dark:bg-input-dark border-2 border-input-light dark:border-input-dark rounded focus:ring-primary checked:bg-primary checked:border-primary" id="terms" name="terms" type="checkbox"/>
+<label class="ml-3 text-sm text-foreground-light/80 dark:text-foreground-dark/80" for="terms">
+                        I agree to the <a class="font-medium text-primary hover:underline" href="#">Terms of Service</a> and <a class="font-medium text-primary hover:underline" href="#">Privacy Policy</a>.
+                    </label>
+</div>
+<div class="pt-4">
+<button class="w-full h-14 px-5 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors duration-200" type="submit">
+                        Sign Up
+                    </button>
+</div>
+</form>
+<p class="mt-8 text-center text-sm text-foreground-light/70 dark:text-foreground-dark/70">
+                Already have an account?
+                <a class="font-medium text-primary hover:underline" href="#">Sign In</a>
+</p>
+</div>
+</div>
+</div>
+
+
+</body></html>

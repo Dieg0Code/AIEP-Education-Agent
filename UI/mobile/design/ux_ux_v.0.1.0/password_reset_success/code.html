@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Password Updated</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "text-light": "#101922",
+                        "text-dark": "#f6f7f8",
+                        "text-subtle-light": "#6b7280",
+                        "text-subtle-dark": "#9ca3af",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col justify-center items-center min-h-screen p-6">
+<div class="w-full max-w-sm text-center">
+<div class="mb-8">
+<div class="mx-auto bg-primary/20 dark:bg-primary/30 rounded-full h-24 w-24 flex items-center justify-center">
+<div class="bg-primary rounded-full h-16 w-16 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">
+                        check
+                    </span>
+</div>
+</div>
+</div>
+<h1 class="text-2xl font-bold text-text-light dark:text-text-dark mb-2">Password Updated!</h1>
+<p class="text-text-subtle-light dark:text-text-subtle-dark mb-8">
+            Your password has been changed successfully. You can now log in with your new password.
+        </p>
+<a class="w-full block bg-primary text-white font-bold py-3 px-5 rounded-lg hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors duration-300" href="#">
+            Back to Login
+        </a>
+</div>
+</div>
+
+</body></html>
