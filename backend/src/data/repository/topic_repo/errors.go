@@ -16,6 +16,10 @@ var (
 	ErrTitleEmpty            = errors.New("topic error: el título no puede estar vacío")
 	ErrContentEmpty          = errors.New("topic error: el contenido no puede estar vacío")
 	ErrMissingRequiredFields = errors.New("topic error: faltan campos requeridos: title/content/module_id")
+	ErrInvalidLimit          = errors.New("topic error: límite inválido")
+	ErrEmbeddingRequired     = errors.New("topic error: se requiere embedding")
+	ErrEmbeddingDimensions   = errors.New("topic error: dimensiones de embedding inválidas")
+	ErrSemanticSearchFailed  = errors.New("topic error: la búsqueda semántica falló")
 
 	// Errores de relación
 	ErrModuleNotExists = errors.New("topic error: el módulo especificado no existe")
