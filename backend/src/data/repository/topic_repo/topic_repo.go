@@ -4,7 +4,9 @@ import (
 	"context"
 	"errors"
 
+	topicdto "github.com/Dieg0Code/aiep-agent/src/data/dtos/topic_dto"
 	"github.com/Dieg0Code/aiep-agent/src/data/models"
+	pgvector "github.com/pgvector/pgvector-go"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
@@ -20,6 +22,152 @@ func NewTopicRepo(db *gorm.DB) (TopicRepo, error) {
 	return &topicRepo{
 		db: db,
 	}, nil
+}
+
+// FindSimilarTopics implements TopicRepo.
+func (t *topicRepo) FindSimilarTopics(ctx context.Context, topicID uint, limit int) ([]topicdto.VectorSearchResultDTO, error) {
+	if topicID == 0 {
+		return nil, ErrInvalidTopicID
+	}
+
+	if limit <= 0 {
+		return nil, ErrInvalidLimit
+	}
+
+	// Obtener el topic de referencia con su embedding
+	var referenceTopic models.Topic
+	err := t.db.WithContext(ctx).First(&referenceTopic, topicID).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, ErrTopicNotFound
+		}
+		return nil, err
+	}
+
+	// Verificar que el topic tiene embedding
+	if len(referenceTopic.Embedding.Slice()) == 0 {
+		return nil, ErrEmbeddingRequired
+	}
+
+	// Validar dimensiones del embedding de referencia
+	if len(referenceTopic.Embedding.Slice()) != 1536 {
+		return nil, ErrEmbeddingDimensions
+	}
+
+	// Buscar topics similares usando distancia coseno
+
+	// Buscar topics similares directamente en el DTO
+	var results []topicdto.VectorSearchResultDTO
+	result := t.db.WithContext(ctx).
+		Model(&models.Topic{}).
+		Preload("Module").
+		Select(`
+		topics.id, 
+		topics.scheduled_date, 
+		topics.unit_title, 
+		topics.content, 
+		topics.module_id, 
+		modules.name as module_name, 
+		embedding <=> ? AS distance
+		`, referenceTopic.Embedding).
+		Joins("LEFT JOIN modules ON topics.module_id = modules.id").
+		Where("topics.id != ?", topicID). // Excluir el topic de referencia
+		Order("distance").
+		Limit(limit).
+		Scan(&results)
+
+	if result.Error != nil {
+		return nil, ErrSemanticSearchFailed
+	}
+
+	// Si no se encontraron topics similares
+	if len(results) == 0 {
+		return nil, ErrTopicNotFound
+	}
+
+	return results, nil
+}
+
+// SearchTopicsByEmbedding implements TopicRepo.
+func (t *topicRepo) SearchTopicsByEmbedding(ctx context.Context, embedding pgvector.Vector, limit int) ([]topicdto.VectorSearchResultDTO, error) {
+	if limit <= 0 {
+		return nil, ErrInvalidLimit
+	}
+
+	if len(embedding.Slice()) != 1536 {
+		return nil, ErrEmbeddingDimensions
+	}
+
+	var topics []topicdto.VectorSearchResultDTO
+	result := t.db.WithContext(ctx).
+		Model(&models.Topic{}).
+		Select(`
+		topics.id, 
+		topics.scheduled_date, 
+		topics.unit_title,
+		topics.content,
+		topics.module_id,
+		modules.name as module_name,
+		embedding <=> ? AS distance
+		`, embedding).
+		Joins("LEFT JOIN modules ON topics.module_id = modules.id").
+		Order("distance").
+		Limit(limit).
+		Scan(&topics)
+
+	if result.Error != nil {
+		return nil, ErrSemanticSearchFailed
+	}
+
+	return topics, nil
+}
+
+// SearchTopicsByEmbeddingWithFilter implements TopicRepo.
+func (t *topicRepo) SearchTopicsByEmbeddingWithFilter(ctx context.Context, embedding pgvector.Vector, filter SemanticFilter) ([]topicdto.VectorSearchResultDTO, error) {
+	if filter.Limit <= 0 {
+		return nil, ErrInvalidLimit
+	}
+
+	if len(embedding.Slice()) != 1536 {
+		return nil, ErrEmbeddingDimensions
+	}
+
+	if filter.MinSimilarity < 0 || filter.MinSimilarity > 1.0 {
+		return nil, ErrInvalidLimit
+	}
+
+	// Construir la consulta base con JOIN
+	query := t.db.WithContext(ctx).
+		Model(&models.Topic{}).
+		Select(`
+			topics.id, 
+			topics.scheduled_date, 
+			topics.unit_title,
+			topics.content,
+			topics.module_id,
+			modules.name as module_name,
+			topics.embedding <=> ? AS distance
+		`, embedding).
+		Joins("LEFT JOIN modules ON topics.module_id = modules.id")
+
+	// Aplicar filtros
+	if filter.ModuleID != 0 {
+		query = query.Where("topics.module_id = ?", filter.ModuleID)
+	}
+
+	if filter.MinSimilarity > 0.0 {
+		maxDistance := 1.0 - filter.MinSimilarity
+		query = query.Where("topics.embedding <=> ? <= ?", embedding, maxDistance)
+	}
+
+	// Ejecutar consulta y escanear directamente al DTO
+	var topics []topicdto.VectorSearchResultDTO
+	result := query.Order("distance").Limit(filter.Limit).Scan(&topics)
+	if result.Error != nil {
+		return nil, ErrSemanticSearchFailed
+	}
+
+	return topics, nil
 }
 
 // CreateTopic implements TopicRepo.
@@ -81,7 +229,7 @@ func (t *topicRepo) ListTopics(ctx context.Context, filter TopicFilter) ([]model
 	// Búsqueda por texto en unit_title/official_content/modernized_content
 	if filter.Search != "" {
 		searchTerm := "%" + filter.Search + "%"
-		query = query.Where("unit_title ILIKE ? OR official_content ILIKE ? OR modernized_content ILIKE ?", searchTerm, searchTerm, searchTerm)
+		query = query.Where("unit_title ILIKE ? OR content ILIKE ?", searchTerm, searchTerm)
 	}
 
 	// Aplicar limit y offset para paginación
@@ -171,11 +319,8 @@ func (t *topicRepo) UpdateTopic(ctx context.Context, id uint, updates TopicUpdat
 	if updates.UnitTitle != "" {
 		updateFields["unit_title"] = updates.UnitTitle
 	}
-	if updates.OfficialContent != "" {
-		updateFields["official_content"] = updates.OfficialContent
-	}
-	if updates.ModernizedContent != "" {
-		updateFields["modernized_content"] = updates.ModernizedContent
+	if updates.Content != "" {
+		updateFields["content"] = updates.Content
 	}
 	if updates.ScheduledDate != nil {
 		updateFields["scheduled_date"] = *updates.ScheduledDate

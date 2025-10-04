@@ -3,7 +3,9 @@ package topicrepo
 import (
 	"context"
 
+	topicdto "github.com/Dieg0Code/aiep-agent/src/data/dtos/topic_dto"
 	"github.com/Dieg0Code/aiep-agent/src/data/models"
+	"github.com/pgvector/pgvector-go"
 	"gorm.io/datatypes"
 )
 
@@ -14,6 +16,11 @@ type TopicReader interface {
 	TopicsByModule(ctx context.Context, moduleID uint) ([]models.Topic, error)
 	TopicWithModule(ctx context.Context, topicID uint) (*models.Topic, error)                         // Con módulo incluido
 	TopicsByDateRange(ctx context.Context, startDate, endDate datatypes.Date) ([]models.Topic, error) // Por rango de fechas
+
+	// Búsquedas semánticas con embeddings
+	SearchTopicsByEmbedding(ctx context.Context, embedding pgvector.Vector, limit int) ([]topicdto.VectorSearchResultDTO, error)
+	SearchTopicsByEmbeddingWithFilter(ctx context.Context, embedding pgvector.Vector, filter SemanticFilter) ([]topicdto.VectorSearchResultDTO, error)
+	FindSimilarTopics(ctx context.Context, topicID uint, limit int) ([]topicdto.VectorSearchResultDTO, error)
 }
 
 // Escritura de temas
@@ -37,10 +44,16 @@ type TopicFilter struct {
 	Offset   int
 }
 
+// Filtro para búsquedas semánticas
+type SemanticFilter struct {
+	ModuleID      uint    // Filtrar por módulo específico
+	Limit         int     // Límite de resultados
+	MinSimilarity float32 // Umbral mínimo de similitud (0.0 a 1.0)
+}
+
 // Actualización de tema
 type TopicUpdate struct {
-	UnitTitle         string
-	OfficialContent   string
-	ModernizedContent string
-	ScheduledDate     *datatypes.Date // Pointer para permitir nil (no actualizar)
+	UnitTitle     string
+	Content       string
+	ScheduledDate *datatypes.Date // Pointer para permitir nil (no actualizar)
 }
